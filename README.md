@@ -14,7 +14,8 @@ Avant tout, nous devons effectuer quelques configurations manuelles sur le nouve
 Pour cela, ajouter un routeur sur votre schéma. 
 Ensuite, passer en mode console sur celui-ci. 
 Nous allons ajouter la loopback, l’interface auquel le routeur sera connecté et enfin le configuration SSH. 
-Tout d’abord la loopback. Pour cela veuillez faire ces commandes : 
+Tout d’abord la loopback. Pour cela veuillez faire ces commandes :
+```
 R1#conf t
 R1(config)#interface loopback0
 R1(config-if)#ip address [Votre adresse de Lo0] 255.255.255.255
@@ -31,10 +32,11 @@ R1(config)#crypto key generate rsa
 Il vous sera demander choisir la taille de la clé, vous pouvez choisir ce qui vous semble le mieux, dans notre cas, nous allons choisir 4096
 R1(config)#line vty 0 4
 R1(config-line)#login local
-R1(config-line)#transport input ssh 
+R1(config-line)#transport input ssh
+```
 La connexion SSH devrait être désormais effectué
 
-2.	Connexion SSH : 
+3.	Connexion SSH : 
 Ensuite il faut voir si la machine Linux arrive à bien contacter les routeurs du backbone en SSH. Pour cela, il faut utiliser un playbook permettant de tester la connexion SSH vers le backbone. 
 On va donc l’ajouter dans notre machine Linux afin de lancer la commande : 
 VOIR POUR LA LOCALISATION DES DOSSIER   
