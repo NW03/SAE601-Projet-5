@@ -58,7 +58,6 @@ Cela veut bien dire que l’on peut désormais push les scripts pour la configur
 
 III.	Configuration des routeurs 
 1.	Ajout des VRF dans les routeurs du backbone
-<<<<<<< HEAD
 
 Pour commencer, on va lancer le script python. Celui-ci va nous generer un fichier de playbook personnalisé. Celui-ci ressemblera à celui qui est déjà présent et qui sert d'exemple. Ce playbook va permettre de créer les VRFS et de les propager sur les routeurs, de mettre un ip sur le port du routeur de backbone auquel sera ajouté le client et il va également mettre les routes sur le routeur de backbone. 
 
@@ -82,49 +81,26 @@ Pour commencer, on va lancer le script python. Celui-ci va nous generer un fichi
 
 ansible-playbook -i inventory.yml playbook.yml
 ```
-Une fois cela effectué, vous devrez voir les modifications réalisées.  
+Une fois cela effectué, vous devrez voir les modifications réalisées dans votre terminal avec également la mention ok.
 
+```shell
+# Si vous utilisez le script python:
 
+pyton3 Creation de playbook.py
+
+# laissez vous guidez
+# Une fois que vous avez fini avec le fichier python, celui-ci va générer un fichier avec le nom du client en .yml
+# Réalisez ensuite l'action suivante :
+
+ansible-playbook -i inventory.yml [Client-X].yml
+```
+Une fois cela effectué, vous devrez voir les modifications réalisées dans votre terminal avec également la mention ok.
+
+Enfin, vous pouvez tester la connexion en lancant un ping depuis votre machine vers le routeur créé
+
+```shell
+ping [ip interface nouveau routeur]
+```
 
 =======
-
-Pour commencer, on va lancer le script python. Celui-ci va nous generer un fichier de playbook personnalisé. Celui-ci ressemblera à celui qui est déjà présent et qui sert d'exemple. Ce playbook va permettre de créer les VRFS et de les propager sur les routeurs, de mettre un ip sur le port du routeur de backbone auquel sera ajouté le client et il va également mettre les routes sur le routeur de backbone. 
-
-```shell
-# Si vous n'utilisez pas le script python:
-# - modifier à la main dans playbook.yml :
-# - - vrf definition [nomdevotrevrf]
-# - - rd [votrerd] 
-# - - route-target export [votrerd]
-# - - route-target import [votrerd]
-# - - vrf forwarding [nomdevotrevrf]
-# - - ip address [adresse IP de l'interface du routeur] [masque]
-# - - parents:  [votreinterface]
-# - - when: inventory_hostname == '[votrenomderouteur]'
-# - - ip route vrf [nomdevotrevrf] 0.0.0.0 0.0.0.0 [interface d'un de vos routeurs] global 
-# - - ip route vrf [nomdevotrevrf] 0.0.0.0 0.0.0.0 [interface d'un de vos routeurs] global 
-# - - ip route 192.168.50.0 255.255.255.0 [votreinterface] 192.168.50.2
-# - - when: inventory_hostname == '[votrenomderouteur]'
-
-# Une fois les modifications effectués, enregistrer le fichier puis:
-
-ansible-playbook -i inventory.yml playbook.yml
-```
-Une fois cela réalise, vous devrez voir les modifications apparaitre dans le terminal. 
-
-
-
->>>>>>> 328c2b4e430969f5ac4571cb457e3f74485dd0c4
-Tout d’abord, nous allons ajouter les nouvelles VRF au sein des routeurs du backbone pour qu’ils puissent se contacter entre eux, pour cela nous allons lancer le premier script. 
-Pour cela, suivez ces étapes : 
-Connectez vous à votre machine Linux et entré dans ce fichier « NOM DU FICHIER OU FAUT METTRE LES INFOS » puis renseigner les informations des VRF pour le nouveau client :
-Ensuite lancer le playbook an invite de commande comme ceci : 
-Si ceci apparait : 
-Alors les changements se sont bien effectué, on peut confirmer en déroulant la configuration de l’un des routeurs 
-Enfin, nous allons lancer la configuration sur le nouveau routeur. Pour cela, renseigner dans ce fichier « NOM DU FICHIER POUR LE NEW ROUTEUR » les infos du nouveau routeur.
-Ensuite nous allons lancer le playbook avec cette commande : 
-Si tout se passe bien, ceci devrait s’afficher : 
-Comme pour l’autre script, nous allons vérifier en regardant la configuration du nouveau routeur. 
-Si tout se passe bien, vous devriez retrouver vos informations renseigner dans le fichier directement dans votre nouveau routeur comme ceci : 
-Pour finir nous allons ping le client depuis notre machine Linux pour tester la connexion : 
 Et voilà, votre nouveau routeur est désormais configuré   
