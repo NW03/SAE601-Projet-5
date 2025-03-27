@@ -8,7 +8,14 @@ Avant toute choses, certaines taches devront tout de même être effectué manue
 Nous allons donc utiliser Ansible depuis une machine Linux présente dans le schéma afin de lancer les scripts. 
 
 II.	Prérequis
-1.	Ajout et pré-configuration du routeur :
+1. Sur Linux, il faut tout d'abords installer Ansible et créer le répertoire de travail dans lequel travailler.
+```
+sudo apt update
+sudo apt install ansible
+mkdir {monautomatisation}
+cd {monautomatisation}
+```
+2.	Ajout et pré-configuration du routeur :
 Avant tout, nous devons effectuer quelques configurations manuelles sur le nouveau routeur pour pouvoir le contacter depuis notre machine Linux. 
 Pour cela, ajouter un routeur sur votre schéma. 
 Ensuite, passer en mode console sur celui-ci. 
@@ -40,7 +47,9 @@ Ensuite il faut voir si la machine Linux arrive à bien contacter les routeurs d
 On va donc l’ajouter dans notre machine Linux afin de lancer la commande : 
 VOIR POUR LA LOCALISATION DES DOSSIER   
 Après que les scripts soit placé au bon endroit, il faut utiliser cette commande : 
-METTRE LA COMMANDE POUR TESTER LA CONNEXION SSH 
+```
+ssh {utilisateur}@[monip]
+```
 Si la connexion est bien effectuée, vous devriez avoir cette interface 
 Cela veut bien dire que l’on peut désormais push les scripts pour la configuration. 
 
