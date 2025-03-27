@@ -1,0 +1,28 @@
+---
+- hosts: backbone_routers
+  gathers_facts: no 
+  tasks: 
+    - name: Config VRF
+      ios_config: 
+        lines: 
+          - vrf definition Client-R3
+          - rd 300:1 
+          - address-family ipv4
+          - route-target export 300:1
+          - route-target import 300:1
+    
+    - name: IP sur R11
+      ios_config :
+        lines:
+          - vrf forwarding Client-R3
+          - ip address 192.168.50.1 255.255.255.0
+        parents:  "interface ethernet0/3"
+      when: inventory_hostname == 'R11'
+    
+    - name : IProute sur R11
+      ios_config: 
+        lines: 
+          - ip route vrf Client-R3 0.0.0.0 0.0.0.0 192.168.254.2 global 
+          - ip route vrf Client-R3 0.0.0.0 0.0.0.0 192.168.254.5 global 
+          - ip route 192.168.50.0 255.255.255.0 ethernet 0/3 192.168.50.2
+      when: inventory_hostname == 'R11'
