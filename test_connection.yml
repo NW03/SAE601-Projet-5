@@ -1,0 +1,14 @@
+---
+- name: Test de connexion aux routeurs
+  hosts: core_routers
+  gather_facts: no
+  tasks:
+    - name: Verifier l'acces aux routeurs avec "show ip interface brief"
+      ios_command:
+        commands:
+          - show ip interface brief
+      register: result
+
+    - name: Afficher la sortie
+      debug:
+        var: result.stdout_lines
