@@ -1,5 +1,4 @@
 # SAE601-Projet-5
-Automatisation de déploiement réseau
 I.	Présentation de la méthode d’ajout et de configuration 
 
 La mise en place d’un backbone opérateur BGP/MPLS peut-être complexe une première fois, mais lorsqu’on vient ajouter des clients sur une architecture déjà existante, la procédure est répétitive et source d’erreurs. C’est pourquoi une solution d’automatisation a été mise en place pour les nouveaux routeurs afin de gagner du temps et de réduire les possibles erreurs.
